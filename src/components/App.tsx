@@ -4,10 +4,10 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import { getImages } from "./img-api";
 import SearchBar from "./SearchBar/SearchBar";
 import Loader from "./Loader/Loader";
-import ErrorMessage from "./ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./ImageModal/ImageModal";
 import { Image } from "./App.types";
+import ErrorMessage from "./ErrorMessage/ErrorMessage";
 
 interface Responce {
   results:[];
@@ -36,9 +36,8 @@ export default function App() {
         setLoading(true);
         setError(false);
 
-        // const resonse: Responce = await getImages(searchQuery, page);
-        const resonse = await getImages<Responce>(searchQuery, page);
-        const { results, total } = resonse;
+        const response = await getImages<Responce>(searchQuery, page);
+        const { results, total } = response;
 
         setImages((prevState) => [...prevState, ...results]);
         setTotalPage(page < Math.ceil(total / 15));
@@ -58,10 +57,11 @@ export default function App() {
     setImages([]);
   };
 
-  const hendleLoadMore =  () => {
+  const handleLoadMore =  () => {
     setPage(page + 1);
   };
-// modal
+
+/// modal ///
     const openModal= (imageUrl: string)  => {
       setSelectedImageUrl(imageUrl);
       setModalIsOpen(true);
@@ -82,7 +82,7 @@ export default function App() {
       {images.length > 0 && (
         <ImageGallery items={images} onImageClick={openModal} />
       )}
-      {totalPage && <LoadMoreBtn onClick={hendleLoadMore} />}
+      {totalPage && <LoadMoreBtn onClick={handleLoadMore} />}
 
       {loading && <Loader />}
 

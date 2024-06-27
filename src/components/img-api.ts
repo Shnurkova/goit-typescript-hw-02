@@ -10,9 +10,9 @@ export const getImages = async <T>(
       {
         params: {
           query: setSearchQuery,
-          client_id: "s0XrVkvZCxZybVrgAUlDfLQ7GhmjR-Qp5eV1OTeQ98w",
+          client_id: "A2QUhjFnbjZaCGJPJiyu25igaRP2meWD1nJXBlNcE78",
           page: setPage,
-          per_page: 10,
+          per_page: 15,
         },
       }
     );
